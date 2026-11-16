@@ -36,7 +36,7 @@ namespace View.FormMain
 
         private void btnProduct_Click(object sender, EventArgs e)
         {
-            ProductForm Form = new ProductForm(this);
+            ProductForm Form = new ProductForm();
 
             Form.StartPosition = FormStartPosition.Manual;
             Form.Location = this.Location;

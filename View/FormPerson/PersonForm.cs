@@ -11,7 +11,6 @@ namespace View
         private readonly PersonApplicationService _personApplicationService;
         bool FlagEdit;
         PutPersonDto OldPerson = new PutPersonDto();
-
         public PersonForm()
         {
             InitializeComponent();
@@ -23,6 +22,7 @@ namespace View
             FlagEdit = false;
 
         }
+
 
 
         #region [Buttons]
@@ -119,6 +119,7 @@ namespace View
         #endregion
 
 
+
         #region [selectionChanged]
         private void dgvPerson_SelectionChanged(object sender, EventArgs e)
         {
@@ -130,7 +131,9 @@ namespace View
         #endregion
 
 
-        #region {TextGaurd}
+
+
+        #region [TextGaurd]
         public void TextGaurd(object sender, KeyPressEventArgs e)
         {
 

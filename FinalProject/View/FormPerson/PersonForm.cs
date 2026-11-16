@@ -133,7 +133,7 @@ namespace View
 
 
 
-        #region {TextGaurd}
+        #region [TextGaurd]
         public void TextGaurd(object sender, KeyPressEventArgs e)
         {
 

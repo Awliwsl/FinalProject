@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             btnPost = new Button();
-            btnPut = new Button();
+            btnEdit = new Button();
             btnDelete = new Button();
             btnRefresh = new Button();
             btnBack = new Button();
@@ -40,9 +40,8 @@
             txtProductCode = new TextBox();
             txtProductTitle = new TextBox();
             txtProductUnitPrice = new TextBox();
-            nudProductQuantity = new NumericUpDown();
             dgvProduct = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)nudProductQuantity).BeginInit();
+            textProductQuantity = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             SuspendLayout();
             // 
@@ -58,17 +57,17 @@
             btnPost.UseVisualStyleBackColor = false;
             btnPost.Click += btnPost_Click;
             // 
-            // btnPut
+            // btnEdit
             // 
-            btnPut.BackColor = SystemColors.ActiveCaption;
-            btnPut.Font = new Font("Segoe UI", 11F);
-            btnPut.Location = new Point(490, 73);
-            btnPut.Name = "btnPut";
-            btnPut.Size = new Size(94, 55);
-            btnPut.TabIndex = 1;
-            btnPut.Text = "Edit";
-            btnPut.UseVisualStyleBackColor = false;
-            btnPut.Click += btnPut_Click;
+            btnEdit.BackColor = SystemColors.ActiveCaption;
+            btnEdit.Font = new Font("Segoe UI", 11F);
+            btnEdit.Location = new Point(490, 73);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(94, 55);
+            btnEdit.TabIndex = 1;
+            btnEdit.Text = "Edit";
+            btnEdit.UseVisualStyleBackColor = false;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
@@ -111,7 +110,7 @@
             lblProductCode.AutoSize = true;
             lblProductCode.Location = new Point(18, 15);
             lblProductCode.Name = "lblProductCode";
-            lblProductCode.Size = new Size(82, 20);
+            lblProductCode.Size = new Size(51, 20);
             lblProductCode.TabIndex = 5;
             lblProductCode.Text = "Code :";
             // 
@@ -120,7 +119,7 @@
             lblProductTitle.AutoSize = true;
             lblProductTitle.Location = new Point(18, 47);
             lblProductTitle.Name = "lblProductTitle";
-            lblProductTitle.Size = new Size(82, 20);
+            lblProductTitle.Size = new Size(45, 20);
             lblProductTitle.TabIndex = 6;
             lblProductTitle.Text = "Title :";
             // 
@@ -129,7 +128,7 @@
             lblProductUnitPrice.AutoSize = true;
             lblProductUnitPrice.Location = new Point(18, 79);
             lblProductUnitPrice.Name = "lblProductUnitPrice";
-            lblProductUnitPrice.Size = new Size(82, 20);
+            lblProductUnitPrice.Size = new Size(79, 20);
             lblProductUnitPrice.TabIndex = 7;
             lblProductUnitPrice.Text = "Unit Price :";
             // 
@@ -138,7 +137,7 @@
             lblProductQuantity.AutoSize = true;
             lblProductQuantity.Location = new Point(18, 111);
             lblProductQuantity.Name = "lblProductQuantity";
-            lblProductQuantity.Size = new Size(82, 20);
+            lblProductQuantity.Size = new Size(72, 20);
             lblProductQuantity.TabIndex = 8;
             lblProductQuantity.Text = "Quantity :";
             // 
@@ -149,6 +148,7 @@
             txtProductCode.Name = "txtProductCode";
             txtProductCode.Size = new Size(362, 27);
             txtProductCode.TabIndex = 9;
+            txtProductCode.KeyPress += txtProductCode_KeyPress;
             // 
             // txtProductTitle
             // 
@@ -157,6 +157,7 @@
             txtProductTitle.Name = "txtProductTitle";
             txtProductTitle.Size = new Size(362, 27);
             txtProductTitle.TabIndex = 10;
+            txtProductTitle.KeyPress += txtProductTitle_KeyPress;
             // 
             // txtProductUnitPrice
             // 
@@ -165,15 +166,7 @@
             txtProductUnitPrice.Name = "txtProductUnitPrice";
             txtProductUnitPrice.Size = new Size(362, 27);
             txtProductUnitPrice.TabIndex = 11;
-            // 
-            // nudProductQuantity
-            // 
-            nudProductQuantity.BackColor = SystemColors.ScrollBar;
-            nudProductQuantity.Location = new Point(110, 108);
-            nudProductQuantity.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
-            nudProductQuantity.Name = "nudProductQuantity";
-            nudProductQuantity.Size = new Size(362, 27);
-            nudProductQuantity.TabIndex = 12;
+            txtProductUnitPrice.KeyPress += txtProductUnitPrice_KeyPress;
             // 
             // dgvProduct
             // 
@@ -183,16 +176,22 @@
             dgvProduct.BackgroundColor = SystemColors.ActiveCaption;
             dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProduct.Location = new Point(18, 148);
-            dgvProduct.MultiSelect = true;
             dgvProduct.Name = "dgvProduct";
             dgvProduct.ReadOnly = true;
             dgvProduct.RowHeadersWidth = 51;
             dgvProduct.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvProduct.Size = new Size(454, 170);
             dgvProduct.TabIndex = 13;
-            dgvProduct.CellDoubleClick += dgvProduct_CellDoubleClick;
-            dgvProduct.MouseClick += dgvProduct_MouseClick;
             dgvProduct.SelectionChanged += dgvProduct_SelectionChanged;
+            // 
+            // textProductQuantity
+            // 
+            textProductQuantity.BackColor = SystemColors.ScrollBar;
+            textProductQuantity.Location = new Point(110, 111);
+            textProductQuantity.Name = "textProductQuantity";
+            textProductQuantity.Size = new Size(362, 27);
+            textProductQuantity.TabIndex = 14;
+            textProductQuantity.KeyPress += textProductQuantity_KeyPress;
             // 
             // ProductForm
             // 
@@ -200,8 +199,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(596, 330);
+            Controls.Add(textProductQuantity);
             Controls.Add(dgvProduct);
-            Controls.Add(nudProductQuantity);
             Controls.Add(txtProductUnitPrice);
             Controls.Add(txtProductTitle);
             Controls.Add(txtProductCode);
@@ -212,13 +211,10 @@
             Controls.Add(btnBack);
             Controls.Add(btnRefresh);
             Controls.Add(btnDelete);
-            Controls.Add(btnPut);
+            Controls.Add(btnEdit);
             Controls.Add(btnPost);
             Name = "ProductForm";
             Text = "Product";
-            FormClosed += ProductForm_FormClosed;
-            Load += ProductForm_Load;
-            ((System.ComponentModel.ISupportInitialize)nudProductQuantity).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -227,7 +223,7 @@
         #endregion
 
         private Button btnPost;
-        private Button btnPut;
+        private Button btnEdit;
         private Button btnDelete;
         private Button btnRefresh;
         private Button btnBack;
@@ -238,7 +234,7 @@
         private TextBox txtProductCode;
         private TextBox txtProductTitle;
         private TextBox txtProductUnitPrice;
-        private NumericUpDown nudProductQuantity;
         private DataGridView dgvProduct;
+        private TextBox textProductQuantity;
     }
 }
