@@ -1,4 +1,4 @@
-using ApplicationService.Dtos;
+using ApplicationService.Dtos.PersonDtos;
 using ApplicationService.Services;
 using Model.DomainModels;
 using System.CodeDom.Compiler;

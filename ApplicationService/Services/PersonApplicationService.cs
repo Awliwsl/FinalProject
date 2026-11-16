@@ -1,4 +1,4 @@
-﻿using ApplicationService.Dtos;
+﻿using ApplicationService.Dtos.PersonDtos;
 using Model.DomainModels;
 using Model.ServiceModels;
 using System;
