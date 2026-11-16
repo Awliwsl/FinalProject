@@ -1,6 +1,6 @@
 ﻿namespace ApplicationService.Dtos.PersonDtos
 {
-    public class EditPersonDto
+    public class PutPersonDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

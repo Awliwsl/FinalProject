@@ -10,7 +10,8 @@ namespace View
     {
         private readonly PersonApplicationService _personApplicationService;
         bool FlagEdit;
-        EditPersonDto OldPerson = new EditPersonDto();
+        PutPersonDto OldPerson = new PutPersonDto();
+
         public PersonForm()
         {
             InitializeComponent();
@@ -22,7 +23,6 @@ namespace View
             FlagEdit = false;
 
         }
-
 
 
         #region [Buttons]
@@ -49,7 +49,7 @@ namespace View
             }
             else
             {
-                EditPersonDto NewPerson = new EditPersonDto()
+                PutPersonDto NewPerson = new PutPersonDto()
                 {
                     FirstName = txtFirstName.Text,
                     LastName = txtLastName.Text
@@ -58,7 +58,7 @@ namespace View
                 txtLastName.Clear();
 
 
-                _personApplicationService.Edit(OldPerson, NewPerson);
+                _personApplicationService.Put(OldPerson, NewPerson);
             }
         }
         #endregion
@@ -119,7 +119,6 @@ namespace View
         #endregion
 
 
-
         #region [selectionChanged]
         private void dgvPerson_SelectionChanged(object sender, EventArgs e)
         {
@@ -129,8 +128,6 @@ namespace View
             else { btnDelete.Enabled = false; }
         }
         #endregion
-
-
 
 
         #region {TextGaurd}

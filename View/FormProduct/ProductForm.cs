@@ -9,8 +9,6 @@ namespace View.FormProduct
     {
         private readonly ProductApplicationService _productApplicationService;
         private readonly MainForm _mainForm;
-
-        // Edit mode (same idea as PersonForm): Edit loads the selected row, Save then updates it.
         private bool _isEditing;
         private int _editId;
         private int _oldCode;
@@ -26,6 +24,11 @@ namespace View.FormProduct
 
             dgvProduct.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvProduct.MultiSelect = true;
+
+            nudProductQuantity.Controls[0].Visible = false;
+            nudProductQuantity.InterceptArrowKeys = false;
+            nudProductQuantity.MouseWheel += (s, e) => ((HandledMouseEventArgs)e).Handled = true;
+
             btnPut.Enabled = false;
             btnDelete.Enabled = false;
             _isEditing = false;
@@ -55,7 +58,7 @@ namespace View.FormProduct
             RefreshData();
         }
 
-        // Save: inserts a new product, or updates the product being edited.
+      
         private void btnPost_Click(object sender, EventArgs e)
         {
             if (!ValidateProductInputs(txtProductCode, txtProductTitle, txtProductUnitPrice, nudProductQuantity)) return;
@@ -113,13 +116,11 @@ namespace View.FormProduct
             }
         }
 
-        // Edit: loads the single selected row into the inputs.
         private void btnPut_Click(object sender, EventArgs e)
         {
             StartEdit();
         }
 
-        // Delete: works for one or many selected rows.
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dgvProduct.SelectedRows.Count == 0) return;
@@ -159,17 +160,12 @@ namespace View.FormProduct
 
         #region [- Grid Events -]
 
-        // One selected row  -> Edit + Delete enabled.
-        // Several rows      -> only Delete enabled.
-        // No selection      -> both disabled.
         private void dgvProduct_SelectionChanged(object sender, EventArgs e)
         {
             int count = dgvProduct.SelectedRows.Count;
 
             btnPut.Enabled = count == 1;
             btnDelete.Enabled = count >= 1;
-
-            // Selection changed while editing -> leave edit mode.
             if (_isEditing)
             {
                 _isEditing = false;

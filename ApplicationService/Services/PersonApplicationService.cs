@@ -11,12 +11,18 @@ namespace ApplicationService.Services
     
     public class PersonApplicationService
     {
+        #region [- PrivateFields -]
         private readonly PersonServiceModel _personServiceModel;
+        #endregion
+
+        #region [- Ctor -]
         public PersonApplicationService()
         {
             _personServiceModel = new PersonServiceModel();
         }
-        #region [GetAll]
+        #endregion
+
+        #region [- GetAll() -]
         public List<GetPersonDto> GetAll()
         {
             var persons = _personServiceModel.SelectAll();
@@ -36,7 +42,7 @@ namespace ApplicationService.Services
         }
         #endregion
 
-        #region [Post]
+        #region [- Post() -]
         public void Post(PostPersonDto postPersonDto)
         {
             var Person = new Person()
@@ -49,7 +55,7 @@ namespace ApplicationService.Services
         }
         #endregion
 
-        #region [Delete]
+        #region [- Delete() -]
         public void Delete(List<DeletePersonDto> ListOfDelete)
         {
             var Persons = new List<Person>();
@@ -67,8 +73,8 @@ namespace ApplicationService.Services
         }
         #endregion
 
-        #region [Edit]
-        public void Edit(EditPersonDto OldPersonDto,EditPersonDto NewPersonDto)
+        #region [- Put() -]
+        public void Put(PutPersonDto OldPersonDto,PutPersonDto NewPersonDto)
         {
             Person OldPerson = new Person()
             {
